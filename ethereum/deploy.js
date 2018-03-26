@@ -5,6 +5,8 @@ const Web3 = require('web3');
 
 const compiledFactory = require('./build/CampaignFactory.json');
 
+console.log(process.env.METAMASK_SEED);
+
 const provider = new HDWalletProvider(
     process.env.METAMASK_SEED,
     `https://rinkeby.infura.io/${process.env.INFURA_API}`

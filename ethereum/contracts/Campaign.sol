@@ -22,7 +22,6 @@ contract Campaign {
         bool complete;
         uint approvalCount;
         mapping(address => bool) approvals;
-
     }
     
     address public manager;
@@ -78,5 +77,21 @@ contract Campaign {
         
         request.recipient.transfer(request.value);
         request.complete = true;
+    }
+
+    function getSummary() public view returns (
+        uint, uint, uint, uint, address
+        ) {
+        return (
+            minContribution,
+            address(this).balance,
+            requests.length,
+            approversCount,
+            manager
+        );
+    }
+
+    function getRequestsCount() public view returns (uint) {
+        return requests.length;
     }
 }
