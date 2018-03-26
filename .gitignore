@@ -1,0 +1,4 @@
+/node_modules
+.next
+/ethereum/build
+.env.local
