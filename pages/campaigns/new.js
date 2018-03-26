@@ -26,9 +26,11 @@ class CampaignNew extends Component {
             });
 
             Router.pushRoute('/');
-        } catch (err){
+        } 
+        catch (err){
             this.setState({ errorMessage: err.message });
         }
+
         this.setState({ isLoading: false });
     }
 
