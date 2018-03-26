@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'semantic-ui-react';
+import { Card, Button, Message } from 'semantic-ui-react';
 import factory from '../ethereum/factory';
 import Layout from '../components/Layout';
 import { Link } from '../routes';
+import web3 from '../ethereum/web3';
 
 class CampaignIndex extends Component {
     static async getInitialProps() {
@@ -10,6 +11,10 @@ class CampaignIndex extends Component {
 
         return { campaigns }
     }
+
+    state = {
+        warningVisible: true
+    };
 
     renderCampaigns() {
         const items = this.props.campaigns.map( (address) => {
@@ -27,10 +32,23 @@ class CampaignIndex extends Component {
         return <Card.Group items={items} />;
     }
 
+    handleDismiss = () => {
+        this.setState({ warningVisible: false })
+
+        console.log(this.state.warningVisible);
+    }
+
     render() {
         return(
             <Layout>
                 <div>
+                    <Message
+                        warning={this.state.warningVisible}
+                        hidden={!this.state.warningVisible}
+                        onDismiss={this.handleDismiss}
+                        header="MetaMask Setup"
+                        content={web3.warningMessage}
+                    />
                     <h3>Open Campaigns</h3>
                     <Link route="/campaigns/new">
                         <a>
